@@ -86,7 +86,7 @@ namespace NumRecognize
             string CagePath;
             try
             {
-                CagePath = basePath + Controllor.FirstChild.LastChild["Path"].InnerText;
+                CagePath = basePath + Controllor.FirstChild!.LastChild!["Path"]!.InnerText;
             }
             catch 
             {
