@@ -41,6 +41,10 @@ namespace NumRecognize
                 ;
             }
         }
+        public static INdataset Boot(string path)
+        {
+            return new MyDataSet(path);
+        }
         private void InsertData(string path, INdata data)
         {
             XmlDocument datacage = new XmlDocument();
@@ -76,10 +80,18 @@ namespace NumRecognize
             root.AppendChild(newData);
             datacage.Save(path);
         }
-        public void PopData()
+        public bool PopData()
         {
             XmlDocument lastCage = new XmlDocument();
-            string CagePath = basePath + Controllor.FirstChild!.LastChild!["Path"]!.InnerText;
+            string CagePath;
+            try
+            {
+                CagePath = basePath + Controllor.FirstChild.LastChild["Path"].InnerText;
+            }
+            catch 
+            {
+                return false;
+            }
             lastCage.Load(CagePath);
             lastCage!.FirstChild!.RemoveChild(lastCage!.FirstChild!.LastChild!);
             Controllor.FirstChild!.LastChild["Count"]!.InnerText =
@@ -94,6 +106,7 @@ namespace NumRecognize
                 lastCage.Save(CagePath);
             }
             Controllor.Save(basePath + "Controllor.xml");
+            return true;
         }
         public void AddData(INdata data)
         {
@@ -134,7 +147,7 @@ namespace NumRecognize
     internal class MyDataSetEnum : IEnumerator
     {
         private XmlDocument Controllor;
-        private XmlDocument database;
+        private XmlDocument? database;
         private XmlNode? currentCage;
         private XmlNode? currentCase;
         private string basepath;

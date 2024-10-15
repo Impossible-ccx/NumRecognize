@@ -11,6 +11,13 @@ namespace NumRecognize
     public interface INdataset : IEnumerable
     {
         int Count { get; }
+        void AddData(INdata data);
+        bool PopData();
+        abstract static INdataset Boot(string path);
+    }
+    public interface INNetwork
+    {
+        int GetResult(INdata inputNdata);
     }
    
 }
