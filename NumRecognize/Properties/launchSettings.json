@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "NumRecognize": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\workshop\\c#\\NumRecognize\\NumRecognize"
+    }
+  }
+}
